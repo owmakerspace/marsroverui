@@ -1,3 +1,8 @@
+// -----------------------------------------------------------------------
+// Code to run when site loads
+// -----------------------------------------------------------------------
+
+getRoverData();
 
 
 // -----------------------------------------------------------------------
@@ -95,3 +100,23 @@ function executeCaptureScience() {
     // TODO: Send Science Command
     console.log("Sience Captured");
 };
+
+// -----------------------------------------------------------------------
+// Rover Data
+// -----------------------------------------------------------------------
+
+function getRoverData() {
+
+    // TODO: Get stats from the server
+    var internalTemp = 24;
+    var frontDistance = 32;
+    var externalTemp = 28;
+    var externalHumidity = 57;
+    var batteryVoltage = 4;
+
+    document.getElementById('internalTemp').innerHTML = internalTemp + " C";
+    document.getElementById('frontDistance').innerHTML = frontDistance + " cm";
+    document.getElementById('externalTemp').innerHTML = externalTemp + " C";
+    document.getElementById('externalHumidity').innerHTML = externalHumidity + " %";
+    document.getElementById('batteryVoltage').innerHTML = batteryVoltage + " V";
+}

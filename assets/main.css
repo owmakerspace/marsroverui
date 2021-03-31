@@ -107,7 +107,7 @@ input {
 }
 
 /* ------------------------------------------------------- */
-/*Table */
+/* Table */
 /* ------------------------------------------------------- */
 
 th {
@@ -115,9 +115,26 @@ th {
 }
 
 /* ------------------------------------------------------- */
-/*Images */
+/* Images */
 /* ------------------------------------------------------- */
 
 .cameraImage {
     transition: all 0.3s ease-in-out;
+    text-align: center;
+    width: 100%;
+    height: 36px;
+}
+
+.video-static {
+    background-image: url(./images/static.gif);
+    opacity: 0.2;
+}
+
+.video-static p {
+    position: relative;
+    color: #ffffff;  
+    font-size: 1.6rem;
+    line-height: 0.9;
+    text-align: center;
+    margin-top: 30vh;
 }

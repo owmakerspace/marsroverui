@@ -15,8 +15,6 @@
   </head>
   <body>
 
-    <script src="./scripts/roverCommands.js"></script>
-
     <div class="container full-height">
 
         <!-- -------------------------------------------------------------------- -->
@@ -95,7 +93,7 @@
 
                     <div class="col-8 p-0">
                         <h6 class="text-small">Interior Temp</h6>
-                        <p id="internalTemp">24 C</p>
+                        <p id="internalTemp">-- C</p>
                     </div>
                 </div>
 
@@ -107,7 +105,7 @@
 
                     <div class="col-8 p-0">
                         <h6 class="text-small">Front Object Dist</h6>
-                        <p id="frontDistance">32 cm</p>
+                        <p id="frontDistance">-- cm</p>
                     </div>
                 </div>
 
@@ -119,7 +117,7 @@
 
                     <div class="col-8 p-0">
                         <h6 class="text-small">External Temp</h6>
-                        <p id="externalTemp">28 C</p>
+                        <p id="externalTemp">-- C</p>
                     </div>
                 </div>
 
@@ -131,7 +129,7 @@
 
                     <div class="col-8 p-0">
                         <h6 class="text-small">External Humidity</h6>
-                        <p id="externalHumidity">12 %</p>
+                        <p id="externalHumidity">-- %</p>
                     </div>
                 </div>
 
@@ -143,7 +141,7 @@
 
                     <div class="col-8 p-0">
                         <h6 class="text-small">Battery Voltage</h6>
-                        <p id="batteryVoltage">8 v</p>
+                        <p id="batteryVoltage">-- v</p>
                     </div>
                 </div>
             </div>
@@ -152,19 +150,13 @@
 
                 <!-- Video Feeds -->
                 <div class="row">
-                    <!-- Rover Feed -->
-                    <div class="col">
-                        <h6 class="text-small">Rover Feed</h6>
-                        <div class="video-block mt-3">
-                            <!-- TODO: Add rover feed here -->
-                        </div>
-                    </div>
     
                     <!-- Mars Orbitor Feed -->
                     <div class="col">
                         <h6 class="text-small">Orbitor Feed</h6>
-                        <div class="video-block mt-3">
+                        <div class="video-block video-static mt-3">
                             <!-- TODO: Add orbitor feed here -->
+                            <p>Feed Coming Soon</p>
                         </div>
                     </div>  
                 </div>
@@ -200,5 +192,7 @@
             </div>
         </div>
     </div>
+
+    <script src="./scripts/roverCommands.js"></script>
   </body>
 </html>
