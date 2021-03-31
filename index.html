@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+
+    <title>Mars Rover</title>
+  </head>
+  <body>
+
+    <script src="./scripts/roverCommands.js"></script>
+
+    <div class="container full-height">
+
+        <!-- -------------------------------------------------------------------- -->
+        <!-- Top Informational Row -->
+
+        <div class="row top-row">
+            <!--Logo -->
+            <div class="col">
+                <h6>Mars Rover Logo</h6>
+            </div>
+
+            <!-- Team Name -->
+            <div class="col">
+                <h6>Team Name</h6>
+            </div>
+        </div>
+
+        <!-- -------------------------------------------------------------------- -->
+        <!-- Center row for Video Feeds -->
+
+        <div class="row center-row">
+
+            <!-- Controls -->
+            <div class="col-auto" style="width: 176px;">
+
+                <!-- Movement Controls -->
+                <div class="row">
+                    <div class="col-auto p-0">
+                        <h6 class="text-small">Movement Controls</h6>
+                    </div>
+
+                    <div class="col-auto button-row mt-2">
+                        <button id="moveLeftButton" class="ghost-button" onclick="setMovementDirection('left')"><img src="./assets/images/arrow_left.svg"></button>
+                        <button id="moveUpButton" class="ghost-button" onclick="setMovementDirection('up')"><img src="./assets/images/arrow_up.svg"></button>
+                        <button id="moveDownButton" class="ghost-button" onclick="setMovementDirection('down')"><img src="./assets/images/arrow_down.svg"></button>
+                        <button id="moveRightButton" class="ghost-button" onclick="setMovementDirection('right')"><img src="./assets/images/arrow_right.svg"></button>
+                    </div>
+                    <div class="col-auto p-0 pt-3">
+                        <input id="moveAmountInput" type="number">
+                    </div>
+                    <div class="p-0 pt-3">
+                        <button class="w-100" onclick="executeMovement()">Execute</button>
+                    </div>
+                </div>
+
+                <!-- Camera Controls -->
+                <div class="row mt-3">
+                    <div class="col-auto p-0">
+                        <h6 class="text-small">Camera Controls</h6>
+                    </div>
+
+                    <div class="col-12 p-0">
+                        <img id="roverCamIcon" class="cameraImage" src="./assets/images/rover_cam.svg">
+                    </div>
+
+                    <div class="col-auto p-0 pt-2">
+                        <input id="camerRotationInput" type="number">
+                    </div>
+                    <div class="p-0 pt-3">
+                        <button class="w-100" onclick="executeCameraRotation()">Execute</button>
+                    </div>
+                </div>
+
+                <!-- Rover Data -->
+                <div class="row mt-3">
+                    <div class="col-12 p-0">
+                        <h6 class="text-small">Rover Data</h6>
+                    </div>
+                </div>
+
+                <!-- Interior Temp -->
+                <div class="row mt-3">
+                    <div class="col-4 p-0 pt-1">
+                        <img src="./assets/images/internal_temp.svg">
+                    </div>
+
+                    <div class="col-8 p-0">
+                        <h6 class="text-small">Interior Temp</h6>
+                        <p id="internalTemp">24 C</p>
+                    </div>
+                </div>
+
+                <!-- Distance Sensor -->
+                <div class="row mt-2">
+                    <div class="col-4 p-0 pt-1">
+                        <img src="./assets/images/distance.svg">
+                    </div>
+
+                    <div class="col-8 p-0">
+                        <h6 class="text-small">Front Object Dist</h6>
+                        <p id="frontDistance">32 cm</p>
+                    </div>
+                </div>
+
+                <!-- Exterior Temp -->
+                <div class="row mt-2">
+                    <div class="col-4 p-0 pt-1">
+                        <img src="./assets/images/external_temp.svg">
+                    </div>
+
+                    <div class="col-8 p-0">
+                        <h6 class="text-small">External Temp</h6>
+                        <p id="externalTemp">28 C</p>
+                    </div>
+                </div>
+
+                <!-- External Humidity -->
+                <div class="row mt-2">
+                    <div class="col-4 p-0 pt-1">
+                        <img src="./assets/images/humidity.svg">
+                    </div>
+
+                    <div class="col-8 p-0">
+                        <h6 class="text-small">External Humidity</h6>
+                        <p id="externalHumidity">12 %</p>
+                    </div>
+                </div>
+
+                <!-- Battery Voltage -->
+                <div class="row mt-2">
+                    <div class="col-4 p-0 pt-1">
+                        <img src="./assets/images/voltage.svg">
+                    </div>
+
+                    <div class="col-8 p-0">
+                        <h6 class="text-small">Battery Voltage</h6>
+                        <p id="batteryVoltage">8 v</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+
+                <!-- Video Feeds -->
+                <div class="row">
+                    <!-- Rover Feed -->
+                    <div class="col">
+                        <h6 class="text-small">Rover Feed</h6>
+                        <div class="video-block mt-3">
+                            <!-- TODO: Add rover feed here -->
+                        </div>
+                    </div>
+    
+                    <!-- Mars Orbitor Feed -->
+                    <div class="col">
+                        <h6 class="text-small">Orbitor Feed</h6>
+                        <div class="video-block mt-3">
+                            <!-- TODO: Add orbitor feed here -->
+                        </div>
+                    </div>  
+                </div>
+    
+                <!-- Science Data -->
+                <div class="row bottom-row p-0 pt-3">
+
+                    <!-- Science Controls -->
+                    <div class="col">
+                        <h5>Science</h5>
+
+                        <button class="w-100 mt-2" onclick="executeCaptureScience()">Capture Science</button>
+                    </div>
+
+                    <div class="col">
+        
+                        <table style="width:100%">
+                            <tr>
+                            <th>Data</th>
+                            <th>Timecaptured</th>
+                            </tr>
+                            <tr>
+                            <td>Tempreture: 26.5c</td>
+                            <td>9:40</td>
+                            </tr>
+                            <tr>
+                            <td>Tempreture: 26.8c</td>
+                            <td>11:12</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
