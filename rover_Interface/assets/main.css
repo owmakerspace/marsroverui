@@ -45,6 +45,11 @@ button:active {
     opacity: 0.6;
 }
 
+button:disabled {
+    opacity: 0.6;
+    border: 1px solid #929292;
+}
+
 .ghost-button {
     border: none;
     padding: 8px;
@@ -81,14 +86,15 @@ input {
 }
 
 .top-row {
-    margin-top: 20px;
+    padding-top: 50px;
     margin-bottom: 12px;
     border-bottom: 3px solid #1C1C1C;
 }
 
-.center-row {
+.center-row-column {
     background-color: #1C1C1C;
     padding: 20px;
+    margin: 10px;
 }
 
 .bottom-row {
@@ -137,4 +143,25 @@ th {
     line-height: 0.9;
     text-align: center;
     margin-top: 30vh;
+}
+
+
+/* ------------------------------------------------------- */
+/* Time Bar */
+/* ------------------------------------------------------- */
+
+.meter { 
+    height: 6px;
+    position: relative;
+    background: #3b3b3b;
+    overflow: hidden;
+}
+
+.meter span {
+    display: block;
+    height: 100%;
+}
+
+.timerBar {
+    background-color: #EB8E24;
 }

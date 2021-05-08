@@ -23,11 +23,11 @@ function setMovementDirection(direction) {
         case 'left':
             document.getElementById("moveLeftButton").classList.add("selected");
             break;
-        case 'up':
-            document.getElementById("moveUpButton").classList.add("selected");
+        case 'forward':
+            document.getElementById("moveForwardButton").classList.add("selected");
             break;
-        case 'down':
-            document.getElementById("moveDownButton").classList.add("selected");
+        case 'backward':
+            document.getElementById("moveBackwardButton").classList.add("selected");
             break;
         case 'right':
             document.getElementById("moveRightButton").classList.add("selected");
@@ -40,8 +40,8 @@ function setMovementDirection(direction) {
 
 function resetMovementArrows() {
     document.getElementById("moveLeftButton").classList.remove("selected");
-    document.getElementById("moveUpButton").classList.remove("selected");
-    document.getElementById("moveDownButton").classList.remove("selected");
+    document.getElementById("moveForwardButton").classList.remove("selected");
+    document.getElementById("moveBackwardButton").classList.remove("selected");
     document.getElementById("moveRightButton").classList.remove("selected");
 
 }
@@ -49,6 +49,9 @@ function resetMovementArrows() {
 // Execute the Movement
 
 function executeMovement() {
+
+    // Rover Movement/Rotation
+    // ----------------------------
 
     var movementAmount = document.getElementById("moveAmountInput").value;
 
@@ -59,19 +62,14 @@ function executeMovement() {
     // TODO: Send Move Command
     console.log("move direction: " + movementDirection);
     console.log("move by: " + movementAmount);
-};
 
-// -----------------------------------------------------------------------
-// Camera Controls
-// -----------------------------------------------------------------------
-
-
-function executeCameraRotation() {
+    // Camera Rotation
+    // ----------------------------
 
     var camerRotation = document.getElementById("camerRotationInput").value;
 
     // Rotate the Camera Icon
-    setCameraIconRotation(camerRotation);
+    setCameraIconRotation(0);
 
     // Reset the fields
     document.getElementById("camerRotationInput").value = "";
@@ -79,10 +77,14 @@ function executeCameraRotation() {
     // TODO: Send Rotate Command
     console.log("rotate camera by: " + camerRotation);
     var cameraRotationConverted = camerRotation + 90;
+
+    // Start Timer
+    setNextCommand("Move Forward 20cm");
+    startTimer();
 };
 
 // Rotate the Camera Icon
-function setCameraIconRotation(rotationDegrees) {
+function setCameraIconRotation(rotationDegrees = 0) {
 
     var camerIcon = document.getElementById("roverCamIcon");
 
@@ -99,6 +101,10 @@ function executeCaptureScience() {
 
     // TODO: Send Science Command
     console.log("Sience Captured");
+
+    // Start Timer
+    setNextCommand("Capture Science");
+    startTimer();
 };
 
 // -----------------------------------------------------------------------
@@ -112,11 +118,55 @@ function getRoverData() {
     var frontDistance = 32;
     var externalTemp = 28;
     var externalHumidity = 57;
-    var batteryVoltage = 4;
+    var batteryVoltage = 5;
 
     document.getElementById('internalTemp').innerHTML = internalTemp + " C";
     document.getElementById('frontDistance').innerHTML = frontDistance + " cm";
     document.getElementById('externalTemp').innerHTML = externalTemp + " C";
     document.getElementById('externalHumidity').innerHTML = externalHumidity + " %";
     document.getElementById('batteryVoltage').innerHTML = batteryVoltage + " V";
+}
+
+// -----------------------------------------------------------------------
+// Countdown Timer
+// -----------------------------------------------------------------------
+
+var countDownTime = 4 * 60;
+
+function startTimer() {
+
+    document.getElementById('timerRow').style.opacity = "1";
+    document.getElementById("executeMovementButton").disabled = true;
+    document.getElementById("executeScienceButton").disabled = true;
+
+    var timer = countDownTime, minutes, seconds;
+
+    var timerInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.getElementById('countDownTimerText').innerHTML = minutes + ":" + seconds;
+
+        remainingPercentage = 100 - (timer / countDownTime * 100);
+        document.getElementById('countDownTimerBar').style.width = remainingPercentage + "%";
+
+        if (--timer < 0) {
+            clearInterval(timerInterval);
+
+            document.getElementById('timerRow').style.opacity = "0.5";
+            document.getElementById("executeMovementButton").disabled = false;
+            document.getElementById("executeScienceButton").disabled = false;
+        }
+    }, 1000);
+}
+
+// -----------------------------------------------------------------------
+// Next Command
+// -----------------------------------------------------------------------
+
+function setNextCommand(nextCommandText) {
+    document.getElementById('nextCommandText').innerHTML = nextCommandText;
 }
