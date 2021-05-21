@@ -4,6 +4,15 @@
 
 getRoverData();
 
+// Check if timer was running
+savedTimerValue = window.localStorage.getItem('timer');
+if (savedTimerValue > 0) {
+    startTimer(savedTimerValue);
+}
+
+// Countdown Time for Interface (Min * Seconds)
+var timeToCountDown = 4 * 60;
+
 
 // -----------------------------------------------------------------------
 // Movement Controls
@@ -80,7 +89,7 @@ function executeMovement() {
 
     // Start Timer
     setNextCommand("Move Forward 20cm");
-    startTimer();
+    startTimer(timeToCountDown);
 };
 
 // Rotate the Camera Icon
@@ -104,7 +113,7 @@ function executeCaptureScience() {
 
     // Start Timer
     setNextCommand("Capture Science");
-    startTimer();
+    startTimer(timeToCountDown);
 };
 
 // -----------------------------------------------------------------------
@@ -131,9 +140,7 @@ function getRoverData() {
 // Countdown Timer
 // -----------------------------------------------------------------------
 
-var countDownTime = 4 * 60;
-
-function startTimer() {
+function startTimer(countDownTime) {
 
     document.getElementById('timerRow').style.opacity = "1";
     document.getElementById("executeMovementButton").disabled = true;
@@ -142,6 +149,9 @@ function startTimer() {
     var timer = countDownTime, minutes, seconds;
 
     var timerInterval = setInterval(function () {
+
+        window.localStorage.setItem('timer', timer);
+
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -155,6 +165,8 @@ function startTimer() {
 
         if (--timer < 0) {
             clearInterval(timerInterval);
+
+            window.localStorage.removeItem('timer');
 
             document.getElementById('timerRow').style.opacity = "0.5";
             document.getElementById("executeMovementButton").disabled = false;
