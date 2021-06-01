@@ -89,7 +89,7 @@ function executeMovement() {
     var cameraRotationConverted = camerRotation + 90;
 
 
-      $.ajax("http://www.beyondthepines.co/datenSammler/updateControl.php?id=1&command="+ movementDirection + "&distance=" + movementAmount +"&cameraAngle=" + camerRotation);
+      $.ajax("http://www.beyondthepines.co/marsMellow/updateControl.php?id=1&command="+ movementDirection + "&distance=" + movementAmount +"&cameraAngle=" + camerRotation);
 
     //   {
     //     type: "POST",
