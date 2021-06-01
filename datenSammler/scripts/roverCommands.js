@@ -29,16 +29,16 @@ function setMovementDirection(direction) {
     resetMovementArrows();
 
     switch (direction) {
-        case 'left':
+        case 'turnLeft':
             document.getElementById("moveLeftButton").classList.add("selected");
             break;
-        case 'forward':
+        case 'moveForward':
             document.getElementById("moveForwardButton").classList.add("selected");
             break;
-        case 'backward':
+        case 'moveBack':
             document.getElementById("moveBackwardButton").classList.add("selected");
             break;
-        case 'right':
+        case 'turnRight':
             document.getElementById("moveRightButton").classList.add("selected");
             break;
     
@@ -58,6 +58,7 @@ function resetMovementArrows() {
 // Execute the Movement
 
 function executeMovement() {
+
 
     // Rover Movement/Rotation
     // ----------------------------
@@ -87,8 +88,22 @@ function executeMovement() {
     console.log("rotate camera by: " + camerRotation);
     var cameraRotationConverted = camerRotation + 90;
 
+
+      $.ajax("http://www.beyondthepines.co/datenSammler/updateControl.php?id=1&command="+ movementDirection + "&distance=" + movementAmount +"&cameraAngle=" + camerRotation);
+
+    //   {
+    //     type: "POST",
+    //     url: linkURL,
+    //     success: function () {
+            
+    //       console.log("worked?");
+    //     }
+    //   }
+
+
+
     // Start Timer
-    setNextCommand("Move Forward 20cm");
+    setNextCommand(movementDirection + " for " + movementAmount + " Miliseconds with" + camerRotation + "Camera Rotation");
     startTimer(timeToCountDown);
 };
 

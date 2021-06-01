@@ -7,6 +7,10 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
 
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="assets/main.css">
@@ -26,7 +30,7 @@
                 document.getElementById('frontDistance').innerHTML= myArr.controlTest[0].distanceRead + " CM";
                 document.getElementById('externalTemp').innerHTML= myArr.controlTest[0].extTemp + " C";
                 document.getElementById('externalHumidity').innerHTML= myArr.controlTest[0].extHum + " %";
-                document.getElementById('batteryVoltage').innerHTML= myArr.controlTest[0].extHum + " %";
+                document.getElementById('batteryVoltage').innerHTML= myArr.controlTest[0].voltage + " V";
                 
             
         }
@@ -135,7 +139,7 @@
 
             <!-- ------------------------- -->
             <!-- Rover Controls -->
-
+  
             <div class="col center-row-column">
 
                 <h4>Rover Controls</h4>
@@ -151,7 +155,7 @@
                     </div>
 
                     <div class="col-12 pt-2">
-                        <input id="camerRotationInput" name="camerRotationInput" type="number" oninput="setCameraIconRotation(camerRotationInput.value)">
+                        <input id="camerRotationInput" onclick="" name="camerRotationInput" type="number" oninput="setCameraIconRotation(camerRotationInput.value)">
                     </div>
                 </div>
 
@@ -163,10 +167,10 @@
 
                     <div class="col-12 mt-2">
                         <div class="row">
-                            <button id="moveLeftButton" class="ghost-button col" onclick="setMovementDirection('left')"><img src="./assets/images/arrow_left.svg"></button>
-                            <button id="moveForwardButton" class="ghost-button col" onclick="setMovementDirection('forward')"><img src="./assets/images/arrow_forward.svg"></button>
-                            <button id="moveBackwardButton" class="ghost-button col" onclick="setMovementDirection('backward')"><img src="./assets/images/arrow_backward.svg"></button>
-                            <button id="moveRightButton" class="ghost-button col" onclick="setMovementDirection('right')"><img src="./assets/images/arrow_right.svg"></button>
+                            <button id="moveLeftButton" class="ghost-button col" onclick="setMovementDirection('turnLeft')"><img src="./assets/images/arrow_left.svg"></button>
+                            <button id="moveForwardButton" class="ghost-button col" onclick="setMovementDirection('moveForward')"><img src="./assets/images/arrow_forward.svg"></button>
+                            <button id="moveBackwardButton" class="ghost-button col" onclick="setMovementDirection('moveBack')"><img src="./assets/images/arrow_backward.svg"></button>
+                            <button id="moveRightButton" class="ghost-button col" onclick="setMovementDirection('turnRight')"><img src="./assets/images/arrow_right.svg"></button>
                         </div>
                     </div>
                     <div class="col-12 pt-3">
@@ -177,6 +181,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- ------------------------- -->
             <!-- Science Controls -->
