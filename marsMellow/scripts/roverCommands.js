@@ -92,17 +92,6 @@ function executeMovement() {
 
       $.ajax("http://www.beyondthepines.co/marsMellow/updateControl.php?id=1&command="+ movementDirection + "&distance=" + movementAmount +"&cameraAngle=" + camerRotation);
 
-    //   {
-    //     type: "POST",
-    //     url: linkURL,
-    //     success: function () {
-            
-    //       console.log("worked?");
-    //     }
-    //   }
-
-
-
     // Start Timer
     setNextCommand(movementDirection + " for " + movementAmount + " Miliseconds with " + camerRotation + "' Camera Rotation");
     startTimer(timeToCountDown);
