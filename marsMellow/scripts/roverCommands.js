@@ -89,8 +89,6 @@ function executeMovement() {
 
     // TODO: Send Rotate Command
     console.log("rotate camera by: " + camerRotation);
-    var cameraRotationConverted = camerRotation + 90;
-
 
       $.ajax("http://www.beyondthepines.co/marsMellow/updateControl.php?id=1&command="+ movementDirection + "&distance=" + movementAmount +"&cameraAngle=" + camerRotation);
 
@@ -114,8 +112,9 @@ function executeMovement() {
 function setCameraIconRotation(rotationDegrees = 0) {
 
     var camerIcon = document.getElementById("roverCamIcon");
-
-    camerIcon.style.transform = "rotate(" + rotationDegrees + "deg)";
+    console.log(parseInt(rotationDegrees)-90);
+    var rotationVal = parseInt(rotationDegrees)-90;
+    camerIcon.style.transform = "rotate(" + rotationVal + "deg)";
 }
 
 
@@ -150,11 +149,32 @@ function getScience() {
        var scienceTime= window.localStorage.getItem('Science ' + (i+1) + 'time');
 
        if (scienceValue) {
+        var scienceName = "Science " + (i+1);
+        switch (scienceName) {
+            case 'Science 1':
+                scienceName = 'Foodbar Valley';
+                break;
+            case 'Science 2':
+                scienceName = "The Devil's Circle";
+                break;
+            case 'Science 3':
+                scienceName = 'Outback Rock';
+                break;
+            case 'Science 4':
+                scienceName = "Mow Mow's Canyon";
+                break;
+            case 'Science 5':
+                scienceName = 'Week Eight';
+                break;
+            default:
+                break;
+        }
+
         var row = table.insertRow(1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        cell1.innerHTML = "Science " + (i+1);
+        cell1.innerHTML = scienceName;
         cell2.innerHTML = scienceValue;
         cell3.innerHTML = scienceTime;
        }
