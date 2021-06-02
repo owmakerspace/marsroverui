@@ -191,7 +191,13 @@
                 <h4>Science</h4>
 
                 <div class="col-12 pt-3">
-                    <input id="scienceLocationInput" type="text">
+                    <select name="scienceLocationInput" id="scienceLocationInput">
+                        <option value="Science 1">Science 1</option>
+                        <option value="Science 2">Science 2</option>
+                        <option value="Science 3">Science 3</option>
+                        <option value="Science 4">Science 4</option>
+                        <option value="Science 5">Science 5</option>
+                      </select>
                 </div>
                 <div class="pt-3">
                     <button class="w-100" id="executeScienceButton" onclick="executeCaptureScience()">Capture Science</button>
@@ -199,21 +205,11 @@
 
                 <hr>
 
-                <table style="width:100%">
+                <table style="width:100%" id="scienceTable">
                     <tr>
                     <th>Location</th>
                     <th>Data</th>
                     <th>Time</th>
-                    </tr>
-                    <tr>
-                    <td>Crater 1</td>
-                    <td><b>Temperature: 26.5c</b></td>
-                    <td>9:40</td>
-                    </tr>
-                    <tr>
-                    <td>Crater 2</td>
-                    <td><b>Temperature: 26.8c</b></td>
-                    <td>11:12</td>
                     </tr>
                 </table>
             </div>
