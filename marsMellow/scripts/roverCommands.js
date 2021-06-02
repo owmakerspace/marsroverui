@@ -13,6 +13,9 @@ if (savedTimerValue > 0) {
 // Countdown Time for Interface (Min * Seconds)
 var timeToCountDown = 4 * 60;
 
+// Get Science Locations
+getScience();
+
 
 // -----------------------------------------------------------------------
 // Movement Controls
@@ -89,7 +92,7 @@ function executeMovement() {
     var cameraRotationConverted = camerRotation + 90;
 
 
-      $.ajax("http://www.beyondthepines.co/datenSammler/updateControl.php?id=1&command="+ movementDirection + "&distance=" + movementAmount +"&cameraAngle=" + camerRotation);
+      $.ajax("http://www.beyondthepines.co/marsMellow/updateControl.php?id=1&command="+ movementDirection + "&distance=" + movementAmount +"&cameraAngle=" + camerRotation);
 
     //   {
     //     type: "POST",
@@ -120,11 +123,39 @@ function setCameraIconRotation(rotationDegrees = 0) {
 // Science
 // -----------------------------------------------------------------------
 
+function getScience() {
+    science1Value = window.localStorage.getItem('Science 1');
+    science1ValueTime = window.localStorage.getItem('Science 1time');
+
+    for (let i = 0; i < 5; i++) {
+       var scienceValue = window.localStorage.getItem('Science ' + (i+1));
+       var scienceTime= window.localStorage.getItem('Science ' + (i+1) + 'time');
+
+       if (scienceValue) {
+        var table = document.getElementById("scienceTable");
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = "Science " + (i+1);
+        cell2.innerHTML = scienceValue;
+        cell3.innerHTML = scienceTime;
+       }
+    }
+
+    console.log(science1Value);
+    console.log(science1ValueTime); 
+};
 
 function executeCaptureScience() {
 
-    // TODO: Send Science Command
-    console.log("Sience Captured");
+    var scienceLocation = document.getElementById("scienceLocationInput").value;
+    var currentDate = new Date();
+
+    window.localStorage.setItem(scienceLocation, document.getElementById('internalTemp').innerHTML);
+    window.localStorage.setItem(scienceLocation + "time", currentDate.toLocaleTimeString());
+
+    getScience();
 
     // Start Timer
     setNextCommand("Capture Science");
