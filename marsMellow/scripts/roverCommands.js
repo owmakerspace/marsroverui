@@ -124,15 +124,32 @@ function setCameraIconRotation(rotationDegrees = 0) {
 // -----------------------------------------------------------------------
 
 function getScience() {
-    science1Value = window.localStorage.getItem('Science 1');
-    science1ValueTime = window.localStorage.getItem('Science 1time');
+    var science1Value = window.localStorage.getItem('Science 1');
+    var science1ValueTime = window.localStorage.getItem('Science 1time');
 
+    var table = document.getElementById("scienceTable");
+
+    // Remove items from existing table
+    while(table.hasChildNodes())
+    {
+        table.removeChild(table.firstChild);
+    }
+
+    // Add headings to Table
+    var headRow = table.insertRow(0);
+    var cell1 = headRow.insertCell(0);
+    var cell2 = headRow.insertCell(1);
+    var cell3 = headRow.insertCell(2);
+    cell1.innerHTML = "Location";
+    cell2.innerHTML = "Data";
+    cell3.innerHTML = "Time";
+
+    // Add items to Table
     for (let i = 0; i < 5; i++) {
        var scienceValue = window.localStorage.getItem('Science ' + (i+1));
        var scienceTime= window.localStorage.getItem('Science ' + (i+1) + 'time');
 
        if (scienceValue) {
-        var table = document.getElementById("scienceTable");
         var row = table.insertRow(1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -147,15 +164,11 @@ function getScience() {
     console.log(science1ValueTime); 
 };
 
+var shouldScienceBeCaptured = false;
+
 function executeCaptureScience() {
 
-    var scienceLocation = document.getElementById("scienceLocationInput").value;
-    var currentDate = new Date();
-
-    window.localStorage.setItem(scienceLocation, document.getElementById('internalTemp').innerHTML);
-    window.localStorage.setItem(scienceLocation + "time", currentDate.toLocaleTimeString());
-
-    getScience();
+    shouldScienceBeCaptured = true;
 
     // Start Timer
     setNextCommand("Capture Science");
@@ -169,15 +182,15 @@ function executeCaptureScience() {
 function getRoverData() {
 
     // TODO: Get stats from the server
-    var internalTemp = 24;
-    var frontDistance = 32;
-    var externalTemp = 28;
-    var externalHumidity = 57;
-    var batteryVoltage = 5;
+    var internalTemp = "--";
+    var frontDistance = "--";
+    var externalTemp = "--";
+    var externalHumidity = "--";
+    var batteryVoltage = "--";
 
-    document.getElementById('internalTemp').innerHTML = internalTemp + " C";
+    document.getElementById('internalTemp').innerHTML = internalTemp + " °C";
     document.getElementById('frontDistance').innerHTML = frontDistance + " cm";
-    document.getElementById('externalTemp').innerHTML = externalTemp + " C";
+    document.getElementById('externalTemp').innerHTML = externalTemp + " °C";
     document.getElementById('externalHumidity').innerHTML = externalHumidity + " %";
     document.getElementById('batteryVoltage').innerHTML = batteryVoltage + " V";
 }
@@ -217,6 +230,18 @@ function startTimer(countDownTime) {
             document.getElementById('timerRow').style.opacity = "0.5";
             document.getElementById("executeMovementButton").disabled = false;
             document.getElementById("executeScienceButton").disabled = false;
+
+            if (shouldScienceBeCaptured) {
+                shouldScienceBeCaptured = false;
+
+                var scienceLocation = document.getElementById("scienceLocationInput").value;
+                var currentDate = new Date();
+            
+                window.localStorage.setItem(scienceLocation, document.getElementById('externalTemp').innerHTML + ' | ' + document.getElementById('externalHumidity').innerHTML);
+                window.localStorage.setItem(scienceLocation + "time", currentDate.getHours() + ":" + currentDate.getMinutes());
+
+                getScience();
+            }
         }
     }, 1000);
 }
