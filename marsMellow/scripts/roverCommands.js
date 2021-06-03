@@ -173,15 +173,15 @@ function getScience() {
     console.log(science1ValueTime); 
 };
 
-var shouldScienceBeCaptured = false;
-
 function executeCaptureScience() {
 
-    shouldScienceBeCaptured = true;
+    var scienceLocation = document.getElementById("scienceLocationInput").value;
+    var currentDate = new Date();
 
-    // Start Timer
-    setNextCommand("Capture Science");
-    startTimer(timeToCountDown);
+    window.localStorage.setItem(scienceLocation, document.getElementById('externalTemp').innerHTML + ' | ' + document.getElementById('externalHumidity').innerHTML);
+    window.localStorage.setItem(scienceLocation + "time", currentDate.getHours() + ":" + currentDate.getMinutes());
+
+    getScience();
 };
 
 // -----------------------------------------------------------------------
@@ -239,18 +239,6 @@ function startTimer(countDownTime) {
             document.getElementById('timerRow').style.opacity = "0.5";
             document.getElementById("executeMovementButton").disabled = false;
             document.getElementById("executeScienceButton").disabled = false;
-
-            if (shouldScienceBeCaptured) {
-                shouldScienceBeCaptured = false;
-
-                var scienceLocation = document.getElementById("scienceLocationInput").value;
-                var currentDate = new Date();
-            
-                window.localStorage.setItem(scienceLocation, document.getElementById('externalTemp').innerHTML + ' | ' + document.getElementById('externalHumidity').innerHTML);
-                window.localStorage.setItem(scienceLocation + "time", currentDate.getHours() + ":" + currentDate.getMinutes());
-
-                getScience();
-            }
         }
     }, 1000);
 }
